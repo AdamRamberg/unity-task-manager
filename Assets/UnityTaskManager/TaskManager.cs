@@ -41,6 +41,13 @@ namespace UnityTaskManager
 			if(autoStart)
 				Start();
 		}
+
+		public void RerunFinishedTask(IEnumerator coroutine) 
+		{
+			if (task.Running) return;
+
+			task.Rerun(coroutine);
+		}
 		
 		// Begins execution of the coroutine
 		public void Start()
@@ -125,6 +132,15 @@ namespace UnityTaskManager
 				running = false;
 			}
 			
+			public void Rerun(IEnumerator c) 
+			{
+				coroutine = c;
+				running = true;
+				paused = false;
+				stopped = false;
+				singleton.StartCoroutine(CallWrapper());
+			}
+
 			IEnumerator CallWrapper()
 			{
 				yield return null;
