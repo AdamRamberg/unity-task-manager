@@ -22,7 +22,7 @@ constraint from the user.
 
 ## Example usage:
 
-```
+```csharp
 IEnumerator MyAwesomeTask()
 {
     while(true) {
